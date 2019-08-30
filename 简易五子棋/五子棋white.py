@@ -1,7 +1,7 @@
 # 思路
 # 1. 画两个棋盘
 # 2. 点哪里就在哪里画棋子
-# 3. 一方下完等待另一方落子
+# 3. 一方下完等待另一方落子g
 # 4. 判断输赢
 
 from tkinter import *
@@ -9,6 +9,7 @@ from tkinter.messagebox import *
 from json import *
 from socket import *
 from threading import Thread
+import os
 
 
 # 画棋盘横线
@@ -78,7 +79,6 @@ def close_window(x1, y1, x2, y2):
     list1 = [x1, y1, x2, y2, hint]
     message = dumps(list1)
     send_coordinate(message)
-    # win.destroy()
     os._exit(1)
 
 
@@ -94,6 +94,8 @@ def judge_winning_losing(i, j, x1, y1, x2, y2):
                 count += 1
                 if count >= 5:
                     close_window(x1, y1, x2, y2)
+            else:
+                break
     for x in range(1, 6):
         if j - x < 0:
             break
@@ -102,6 +104,8 @@ def judge_winning_losing(i, j, x1, y1, x2, y2):
                 count += 1
                 if count >= 5:
                     close_window(x1, y1, x2, y2)
+            else:
+                break
     # 纵向判断
     count = 1
     for x in range(1, 6):
@@ -112,6 +116,8 @@ def judge_winning_losing(i, j, x1, y1, x2, y2):
                 count += 1
                 if count >= 5:
                     close_window(x1, y1, x2, y2)
+            else:
+                break
     for x in range(1, 6):
         if i - x < 0:
             break
@@ -120,6 +126,8 @@ def judge_winning_losing(i, j, x1, y1, x2, y2):
                 count += 1
                 if count >= 5:
                     close_window(x1, y1, x2, y2)
+            else:
+                break
     # 斜向判断
     count = 1
     for x in range(1, 6):
@@ -130,6 +138,8 @@ def judge_winning_losing(i, j, x1, y1, x2, y2):
                 count += 1
                 if count >= 5:
                     close_window(x1, y1, x2, y2)
+            else:
+                break
     for x in range(1, 6):
         if i - x < 0 or j - x < 0:
             break
@@ -138,6 +148,8 @@ def judge_winning_losing(i, j, x1, y1, x2, y2):
                 count += 1
                 if count >= 5:
                     close_window(x1, y1, x2, y2)
+            else:
+                break
     # 反斜判断
     count = 1
     for x in range(1, 6):
@@ -148,6 +160,8 @@ def judge_winning_losing(i, j, x1, y1, x2, y2):
                 count += 1
                 if count >= 5:
                     close_window(x1, y1, x2, y2)
+            else:
+                break
     for x in range(1, 6):
         if i - x < 0 or j + x > 13:
             break
@@ -156,6 +170,8 @@ def judge_winning_losing(i, j, x1, y1, x2, y2):
                 count += 1
                 if count >= 5:
                     close_window(x1, y1, x2, y2)
+            else:
+                break
 
 
 # 创建线程用来接收消息
